@@ -1,0 +1,51 @@
+components:
+  responses:
+    badRequest:
+      description: Bad request
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: "#/components/schemas/errorResponse"
+    authError:
+      description: Authentication error
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: "#/components/schemas/errorResponse"
+    serverError:
+      description: Internal server error
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: "#/components/schemas/errorResponse"
+  schemas:
+    authResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: Success
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+    patchResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: Success
+        data:
+          type: object
+    thumbResponse:
+      type: string
+      format: binary
+    errorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: Error
+        error:
+          type: string

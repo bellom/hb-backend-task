@@ -1,0 +1,32 @@
+paths:
+  /login:
+    post:
+      tags:
+        - User
+      summary: login a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: admin
+                password:
+                  type: string
+                  format: password
+              required:
+                - username
+                - password
+      responses:
+        "200":
+          description: User login successful. An object with user token is sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/authResponse"
+        "400":
+          $ref: "#/components/responses/badRequest"
+        "500":
+          $ref: "#/components/responses/serverError"

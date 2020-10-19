@@ -1,0 +1,40 @@
+path:
+  /json:
+    patch:
+      tags:
+        - JSON Patch
+      summary: Patch a json object
+      parameters:
+        - in: query
+          name: token
+          schema:
+            type: string
+          description: jwt token for authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document:
+                  type: object
+                  example: { food: "rice", game: "tennis" }
+                patch:
+                  type: array
+                  items:
+                    type: object
+                    example: { op: "replace", path: "/food", value: "seafood" }
+              required:
+                - document
+                - patch
+      responses:
+        "201":
+          description: JSON Object successfully patched
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/patchResponse"
+        "400":
+          $ref: "#/components/responses/badRequest"
+        "500":
+          $ref: "#/components/responses/serverError"

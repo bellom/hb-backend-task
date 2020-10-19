@@ -1,0 +1,28 @@
+path:
+  /thumbnail:
+    get:
+      tags:
+        - thumbnail
+      summary: Thumbnail generator
+      parameters:
+        - in: query
+          name: token
+          schema:
+            type: string
+          description: jwt token for authentication
+        - in: query
+          name: url
+          schema:
+            type: string
+          description: public url link to the image
+      responses:
+        "201":
+          description: Thumbnail image
+          content:
+            image/jpg:
+              schema:
+                $ref: "#/components/schemas/thumbResponse"
+        "400":
+          $ref: "#/components/responses/badRequest"
+        "500":
+          $ref: "#/components/responses/serverError"
